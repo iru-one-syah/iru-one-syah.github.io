@@ -2697,17 +2697,17 @@ var bibtexify = (function($) {
         },
         // labels used for the different types of entries
         labels: {
-            'article': 'Journal',
+            'article': 'Journal Paper',
             'book': 'Book',
             'conference': 'Conference',
             'inbook': 'Book chapter',
             'incollection': 'In Collection',
-            'inproceedings': 'Conference',
+            'inproceedings': 'Int. Conference',
             'manual': 'Manual',
             'mastersthesis': 'Thesis',
-            'misc': 'Indonesian Journal',
+            'misc': 'Indonesian Article',
             'phdthesis': 'PhD Thesis',
-            'proceedings': 'Indonesian Seminar',
+            'proceedings': 'Domestic Conference',
             'techreport': 'Technical Report',
             'unpublished': 'Unpublished'}
     };
