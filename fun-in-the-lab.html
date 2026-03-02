@@ -1,478 +1,952 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Irwansyah | Fun in the Lab</title>
 
-  <title>Irwan's Page</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
+  <style>
+    :root{
+      --accent: #C9FF00;
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+      /* Light theme */
+      --text: #111;
+      --muted: rgba(0,0,0,.72);
+      --muted2: rgba(0,0,0,.60);
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel="stylesheet">
+      --card: rgba(255,255,255,.03);
+      --card2: rgba(255,255,255,.10);
+      --stroke: rgba(0,0,0,.12);
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+      --radius: 18px;
+      --maxw: 1120px;
+    }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
 
-  <!-- =======================================================
-  * Template Name: MyResume - v2.1.0
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: #f6f6f6;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Hide page scrollbar (still scrollable) */
+    html, body{
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar{
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    /* ---------- HERO BACKGROUND ---------- */
+    .hero{
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      position: relative;
+
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.30) 55%, rgba(255,255,255,.60) 100%),
+        url("img/bg.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before{
+      content:"";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(0,0,0,.06), transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(201,255,0,.10), transparent 45%),
+        radial-gradient(circle at 30% 90%, rgba(0,0,0,.05), transparent 45%);
+      opacity: .25;
+    }
+
+    /* ---------- TOP NAV ---------- */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.55);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .navwrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      flex: 0 0 auto;
+    }
+
+    .nav-menu{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-menu a{
+      text-decoration: none;
+      color: rgba(0,0,0,.82);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, transform .08s ease;
+    }
+
+    .nav-menu a:hover{
+      background: rgba(0,0,0,.06);
+      border-color: rgba(0,0,0,.08);
+      transform: translateY(-1px);
+    }
+
+    .nav-menu a.active{
+      background: rgba(201,255,0,.22);
+      border-color: rgba(0,0,0,.18);
+      color: rgba(0,0,0,.92);
+    }
+
+    .menu-toggle{
+      display: none;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.18);
+      color: rgba(0,0,0,.9);
+      font-size: 18px;
+      line-height: 1;
+      padding: 8px 11px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .menu-toggle:hover{ background: rgba(0,0,0,.06); }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .content{
+      position: relative;
+      z-index: 1;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 24px 18px 18px;
+
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 16px;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .card-inner{
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .headline{
+      margin: 0;
+      font-size: clamp(26px, 3.0vw, 38px);
+      letter-spacing: -0.4px;
+      line-height: 1.08;
+    }
+
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: none;
+    }
+
+    /* ---------- FILTER ROW ---------- */
+    .filter-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .chip{
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.14);
+      color: rgba(0,0,0,.82);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+    }
+    .chip:hover{ transform: translateY(-1px); background: rgba(0,0,0,.05); }
+    .chip.active{
+      background: rgba(201,255,0,.22);
+      border-color: rgba(0,0,0,.18);
+      font-weight: 650;
+    }
+
+    /* ---------- GRID ---------- */
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .tile{
+      grid-column: span 4;
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.10);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .10s ease, border-color .15s ease, background .15s ease;
+    }
+    .tile:hover{
+      transform: translateY(-2px);
+      border-color: rgba(0,0,0,.18);
+      background: rgba(255,255,255,.14);
+    }
+
+    .thumb{
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.18);
+    }
+    .thumb img{
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .play{
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .play .btn{
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(0,0,0,.18);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+    }
+    .play .tri{
+      width: 0; height: 0;
+      border-left: 14px solid rgba(0,0,0,.72);
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 2px;
+    }
+
+    .meta{
+      padding: 12px 12px 14px;
+      display: grid;
+      gap: 6px;
+    }
+    .badge{
+      width: fit-content;
+      font-size: 12px;
+      color: rgba(0,0,0,.78);
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.22);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: None; 
+    }
+
+    .title{
+      margin: 0;
+      font-size: 14px;
+      font-weight: 860;
+      color: rgba(0,0,0,.92);
+      line-height: 1.35;
+    }
+
+    .desc{
+      margin: 0;
+      font-size: 13px;
+      color: rgba(0,0,0,.66);
+      line-height: 1.45;
+    }
+
+    /* ---------- MODAL ---------- */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 100;
+    }
+    .modal.show{ display: flex; }
+
+    .modal-card{
+      width: min(980px, 95vw);
+      border-radius: 18px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(0,0,0,.12);
+      box-shadow: 0 30px 90px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+
+    .modal-head{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.85);
+    }
+
+    .modal-head b{
+      font-size: 14px;
+      color: rgba(0,0,0,.90);
+    }
+
+    .close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.70);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      color: rgba(0,0,0,.75);
+    }
+    .close:hover{ background: rgba(0,0,0,.05); }
+
+    .modal-body{
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .player{
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(0,0,0,.06);
+    }
+
+    .player iframe{
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border: 0;
+      display: block;
+    }
+
+    .player video{
+      width: 100%;
+      display: block;
+      background: #000;
+    }
+
+    .player img{
+      width: 100%;
+      display: block;
+      background: #000;
+    }
+
+    .modal-text{
+      font-size: 13px;
+      color: rgba(0,0,0,.70);
+      line-height: 1.55;
+    }
+
+    .footerline{
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,.10);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(0,0,0,.55);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 980px){
+      .tile{ grid-column: span 6; }
+    }
+
+    @media (max-width: 560px){
+      .tile{ grid-column: span 12; }
+      .play .btn{ width: 54px; height: 54px; }
+    }
+
+    /* ---------- MOBILE NAV DROPDOWN ---------- */
+    @media (max-width: 768px){
+      .menu-toggle{ display: block; }
+      .navwrap{ flex-wrap: wrap; }
+
+      .nav-menu{
+        display: none;
+        width: 100%;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 8px;
+
+        margin-top: 10px;
+        padding: 10px;
+
+        border: 1px solid rgba(0,0,0,.12);
+        background: rgba(255,255,255,.03);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .nav-menu.show{ display: flex; }
+
+      .nav-menu a{
+        padding: 10px 12px;
+        text-align: left;
+        border-radius: 12px;
+      }
+    }
+
+    /* ---------- LOADER OVERLAY ---------- */
+    #page-loader{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #f6f6f6; /* match the page background */
+      display: grid;
+      place-items: center;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #page-loader.hide{
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner{
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 4px solid rgba(0,0,0,.18);
+      border-top-color: var(--accent);
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin{
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 
 <body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
-  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="d-flex flex-column justify-content-center">
-
-    <nav class="nav-menu">
-      <ul>
-        <li><a href="index.html"><i class="bx bx-home"></i> <span>Welcome</span></a></li>
-        <li><a href="academic-journey.html"><i class="bx bx-user"></i> <span>Academic Journey</span></a></li>
-        <li class="active"><a href="#research"><i class="bx bx-cog"></i> <span>Fun in the Lab</span></a></li>
-        <li><a href="highlights.html"><i class="bx bx-award"></i> <span>Highlights</span></a></li>
-      </ul>
-    </nav><!-- .nav-menu -->
-
-  </header><!-- End Header -->
-
-<main id="main">
-    <!-- ======= Courses Section ======= -->
-    <section id="research" class="courses">
-      <div class="container">
-      
-        <div class="section-title">
-          <h2>Fun in the Lab</h2>
-          <center><blockquote data-aos="fade-in" data-aos-delay="700">Every failure gives you another chance to try again, but this time with better understanding.</blockquote></center>
-          </center>
-        </div>
-		
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/WkKg865pGbI" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-25.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Tutorial</h4>
-                </div>
-              
-                <h3><a>1-Minute Silicone Pinna</a></h3>
-                <p>Watch the entire process of creating a custom silicone pinna—from 3D model extraction to the final cure—all in just one minute!.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/d9xgpLJQ694" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-24.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Tutorial</h4>
-                </div>
-              
-                <h3><a>My Hearing Test Demo</a></h3>
-                <p>I made this video to help my subjects understand the hearing test—wear headphones, press a button, and view the results on-screen.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/5bxazr6eseA" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-23.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Tutorial</h4>
-                </div>
-              
-                <h3><a>DIY 3D-Printed Dummy Head</a></h3>
-                <p>Create your own dummy head by 3D-printing a skull, adding a realistic touch by coating it with silicone skin—step by step!</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-        </div>
-        
-        <br>
-		
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/SY15300dORE" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-22.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>Cancelling Crosstalk at the Mastoid</a></h3>
-                <p>I've demonstrated how sound from the right vibrator is minimized at the accelerometer using anti-sound from the left vibrator.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/KvZY5TiOy1I" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-21.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Tutorial</h4>
-                </div>
-              
-                <h3><a>DIY Silicone Pinna</a></h3>
-                <p>I documented the process of making a silicone pinna, providing detailed steps for those interested in a similar project.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/KcsgZ78jVzc" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-19.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>3D-Printed Connected Stethoscope</a></h3>
-                <p>I recorded heart sounds using a smartphone and a 3D-printed stethoscope, which is an upgrade from my previous one.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-        </div>
-        
-        <br>
-		
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/D-Oy1AyythQ" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-20.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>Real-Time Crosstalk Cancellation</a></h3>
-                <p>I developed a system for canceling crosstalk in bone conduction (BC) using the Bela Mini embedded audio platform.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/c4teA8M6TQw" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-18.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>Hearing Threshold</a></h3>
-                <p> I made a simple demo video showing how I measured my hearing threshold, the minimal sound level which can still be perceived.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/LQtHSgGGkHc" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-17.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>Bone Conduction Authentication</a></h3>
-                <p>Authenticating registered users and rejecting unknown ones using bone-conducted sound and machine learning.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-        </div>
-        
-        <br>
-		  
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/oCtRc6vQuxQ" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-15.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>Smartphone Case Stethoscope</a></h3>
-                <p>The Smartphone Case Stethoscope is an attachment that turns a smartphone into a digital stethoscope by using a case-like design.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <a href="https://www.youtube.com/watch?v=Fqwtk9E6iHg" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-01.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-              
-                <h3><a>StethoPhone</a></h3>
-                <p>StethoPhone, a low-cost digital stethoscope created using 3D printing technology, is designed for use with smartphones.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <a href="https://youtu.be/ZBURfkvvsv4" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-02.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>App Development</h4>
-                </div>
-
-                <h3><a>StethoPhone App</a></h3>
-                <p>I am developing an Android app with basic functionalities such as audio streaming, filtering, recording, and file sharing.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-        </div>
-        
-        <br>
-
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/IoMTMzMQUdo" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-16.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-
-                <h3><a>Localization using Machine Learning</a></h3>
-                <p>This project aimed to implement real-time sound localization using a Support Vector Machine algorithm.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <a href="https://youtu.be/UwOkG4duJss" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-03.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                </div>
-
-                <h3><a>Spatial SpeechFocus</a></h3>
-                <p>The goal of this project is to implement a binaural speech enhancement method on a single-board computer for real-time usage.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <a href="assets/img/research/research-09.gif" class="venobox play-btn" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-10.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>App Development</h4>
-                </div>
-              
-                <h3><a>Hearing Assistance App</a></h3>
-                <p>This project aimed to implement "Spatial SpeechFocus" (check the previous video) on an Android smartphone.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		  
-        </div>
-        
-        <br>
-        
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/-kOTZSAfCTc" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-13.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Simulation</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Homework</b></span>
-                </div>
-              
-                <h3><a>People Detection</a></h3>
-                <p>This project was a part of my team's homework in an image processing course at Kumamoto University (1st-year master course). </p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <a href="assets/img/research/research-12.jpg" class="venobox play-btn" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-11.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>                  
-                </div>
-              
-                <h3><a>Back-to-Back Speaker System</a></h3>
-                <p>This project aimed at creating a directional loudspeaker system made up of just two speakers positioned back-to-back.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <a href="https://youtu.be/lq4Aa0xdxbU" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-04.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Pink Noise</b></span>
-                </div>
-              
-                <h3><a>Front–Back Discrimination (1)</a></h3>
-                <p>We developed and tested an algorithm for identifying front and back sound origin, using pink noise in an anechoic chamber. </p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-        </div>
-        
-        <br>
-        
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/NN70zxQM6Nc" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-05.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Normal Room - Pink Noise</b></span>
-                </div>
-              
-                <h3><a>Front–Back Discrimination (2)</a></h3>
-                <p>We tested our algorithm for sound localization in a typical room with pink noise, with the highest peak indicating the "true" direction.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <a href="https://youtu.be/NEyR4TzdwZw" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-06.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Normal Room - Speech Signals</b></span>
-                </div>
-              
-                <h3><a>Front–Back Discrimination (3)</a></h3>
-                <p>We tested our localization algorithm in a normal room using speech signals. The algorithm still sometimes confused front and back directions.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-		
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <a href="https://youtu.be/i6rrLb2bdWg" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-07.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Research Idea</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Human Subjects</b></span>
-                </div>
-              
-                <h3><a>Bone Conduction Hearing</a></h3>
-                <p>Our investigation aimed to cancel cross-talk for bone-conducted sounds, as shown in the video only animation, no sound.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
-        </div>
-		
-        <br>
-        
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-		  
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <a href="https://youtu.be/qjTlt7AySVM" class="venobox play-btn" data-vbtype="video" data-autoplay="true" data-aos="fade-up" data-aos-delay="900"></a>
-            <div class="course-item">
-              <img src="assets/img/research/JPG/research-08.jpg" class="img-fluid" alt="...">
-              <div class="course-content">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Experiment</h4>
-                  <span style="font-size:14px;font-family:Dosis"><b>Normal Room</b></span>
-                </div>
-              
-                <h3><a>GCC-PHAT</a></h3>
-                <p>I made a simple real-time sound localization using the GCC-PHAT algorithm, not the FDBM algorithm as stated in the video.</p>
-              </div>
-            </div>
-          </div> <!-- End Course Item-->
-
+  <div id="page-loader" aria-label="Loading">
+    <div class="loader-spinner" aria-hidden="true"></div>
+  </div>
+  <div class="hero">
+    <header class="topbar">
+      <div class="navwrap">
+        <div class="brand">
+          <div class="dot" aria-hidden="true"></div>
+          <span>ir-one</span>
         </div>
 
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav-menu" id="navMenu" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="timeline.html">Timeline</a>
+          <a href="research.html">Research</a>
+          <a class="active" href="fun-in-the-lab.html">Fun in the Lab</a>
+          <a href="highlights.html">Highlights</a>
+          <a href="news.html">News</a>
+        </nav>
       </div>
-    </section><!-- End Courses Section -->
-</main>
+    </header>
 
-  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-  <div id="preloader"></div>
+    <main class="content">
+      <section class="card" aria-label="Fun in the lab">
+        <div class="card-inner">
+          <h1 class="headline">Fun in the Lab</h1>
+          <p class="subtitle">
+            A small collection of demos, experiments, and build logs. Click an item to open it. </br>
+            <i>"Every failure gives you another chance to try again—each one helps build better understanding."</i>
+          </p>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
+          <div class="filter-row" aria-label="Filters">
+            <div class="chip active" data-filter="all"><b>ALL</b></div>
+            <div class="chip" data-filter="demo">Demo</div>
+            <div class="chip" data-filter="video">Videos</div>
+            <div class="chip" data-filter="tutorial">Tutorial</div>
+            <div class="chip" data-filter="photo">Photos</div>
+            <div class="chip" data-filter="silicone pinna">Silicone Pinna</div>
+            <div class="chip" data-filter="dummy head">Dummy Head</div>
+            <div class="chip" data-filter="machine learning">Machine Learning</div>
+            <div class="chip" data-filter="crosstalk cancellation">Crosstalk Cancellation</div>
+            <div class="chip" data-filter="hearing threshold">Hearing Threshold</div>
+            <div class="chip" data-filter="user authentication">User Authentication</div>
+            <div class="chip" data-filter="stethoscope">Stethoscope</div>
+            <div class="chip" data-filter="speech enhancement">Speech Enhancement</div>
+            <div class="chip" data-filter="image processing">Image Processing</div>
+            <div class="chip" data-filter="speaker array">Loudspeaker Array</div>
+            <div class="chip" data-filter="sound localization">Binaural Sound Localization</div>
+          </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+          <div class="grid" id="grid" aria-label="Media grid"></div>
 
+          <div class="footerline">
+            <div>© <span id="year"></span> by ir-one</div>
+            <div>Contact: irwansyah [at] ieee.org</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Media viewer">
+      <div class="modal-head">
+        <b id="modalTitle">Title</b>
+        <button class="close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="player" id="player"></div>
+        <div class="modal-text" id="modalDesc"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ----------------------------
+    // 1) EDIT YOUR ITEMS HERE
+    // type: "youtube" | "mp4" | "photo"
+    // tags: any of: video/photo/tutorial/demo/build
+    // thumb: image shown in grid (recommended)
+    // src:  youtube watch URL OR embed URL OR local file (mp4/photo)
+    // ----------------------------
+    const MEDIA = [
+      {
+        title: "1-Minute Silicone Pinna",
+        type: "youtube",
+        tags: ["video","tutorial","silicone pinna"],
+        thumb: "img/research/JPG/research-25.jpg",
+        src: "https://youtu.be/WkKg865pGbI",
+        desc: "A quick build log: 3D model → mold → silicone casting in about one minute (timelapse style)."
+      },
+      {
+        title: "My Hearing Test Demo",
+        type: "youtube",
+        tags: ["video","demo"],
+        thumb: "img/research/JPG/research-24.jpg",
+        src: "https://youtu.be/d9xgpLJQ694",
+        desc: "A simple demo video used to explain the hearing test procedure to my subjects."
+      },
+      {
+        title: "DIY 3D-Printed Dummy Head",
+        type: "youtube",
+        tags: ["video","tutorial","dummy head"],
+        thumb: "img/research/JPG/research-23.jpg",
+        src: "https://youtu.be/5bxazr6eseA",
+        desc: "A short guide showing the dummy head build steps and materials."
+      },
+      {
+        title: "Cancelling Crosstalk at the Mastoid",
+        type: "youtube",
+        tags: ["video","demo","crosstalk cancellation"],
+        thumb: "img/research/JPG/research-22.jpg",
+        src: "https://youtu.be/SY15300dORE",
+        desc: "A short demo showing how anti-sound reduces the crosstalk at the mastoid measurement point."
+      },
+      {
+        title: "DIY Silicone Pinna",
+        type: "youtube",
+        tags: ["video","tutorial","silicone pinna"],
+        thumb: "img/research/JPG/research-21.jpg",
+        src: "https://youtu.be/KvZY5TiOy1I",
+        desc: "A video documenting how I make a silicone pinna, from mold preparation to casting."
+      },
+      {
+        title: "3D-Printed Connected Stethoscope",
+        type: "youtube",
+        tags: ["video","demo","stethoscope"],
+        thumb: "img/research/JPG/research-19.jpg",
+        src: "https://youtu.be/KcsgZ78jVzc",
+        desc: "A short demo of heart sound recording using a smartphone and a custom 3D-printed stethoscope."
+      },
+      {
+        title: "Real-Time Crosstalk Cancellation",
+        type: "youtube",
+        tags: ["video","demo","crosstalk cancellation"],
+        thumb: "img/research/JPG/research-20.jpg",
+        src: "https://youtu.be/D-Oy1AyythQ",
+        desc: "A real-time system for reducing bone-conduction crosstalk using the Bela Mini embedded audio platform."
+      },
+      {
+        title: "Hearing Threshold",
+        type: "youtube",
+        tags: ["video","demo","hearing threshold"],
+        thumb: "img/research/JPG/research-18.jpg",
+        src: "https://youtu.be/c4teA8M6TQw",
+        desc: "A simple demo showing how hearing threshold is measured—the lowest sound level that can be perceived."
+      },
+      {
+        title: "Bone Conduction Authentication",
+        type: "youtube",
+        tags: ["video","demo","user authentication","machine learning"],
+        thumb: "img/research/JPG/research-17.jpg",
+        src: "https://youtu.be/LQtHSgGGkHc",
+        desc: "A proof-of-concept showing user verification using bone-conducted audio features."
+      },
+      {
+        title: "Smartphone Case Stethoscope",
+        type: "youtube",
+        tags: ["video","demo","stethoscope"],
+        thumb: "img/research/JPG/research-15.jpg",
+        src: "https://youtu.be/oCtRc6vQuxQ",
+        desc: "A prototype attachment that turns a smartphone into a digital stethoscope using a case-style design."
+      },
+      {
+        title: "StethoPhone",
+        type: "youtube",
+        tags: ["video","demo","stethoscope"],
+        thumb: "img/research/JPG/research-01.jpg",
+        src: "https://www.youtube.com/watch?v=Fqwtk9E6iHg",
+        desc: "A low-cost digital stethoscope prototype created using 3D printing and designed for use with smartphones."
+      },
+      {
+        title: "StethoPhone App",
+        type: "youtube",
+        tags: ["video","demo","stethoscope"],
+        thumb: "img/research/JPG/research-02.jpg",
+        src: "https://youtu.be/ZBURfkvvsv4",
+        desc: "An Android-based signal processing app with streaming, filtering, recording, and data-sharing capabilities."
+      },
+      {
+        title: "Localization using Machine Learning",
+        type: "youtube",
+        tags: ["video","demo","sound localization","machine learning"],
+        thumb: "img/research/JPG/research-16.jpg",
+        src: "https://youtu.be/IoMTMzMQUdo",
+        desc: "An experimental real-time sound localization system using SVM-based classification."
+      },
+      {
+        title: "Spatial SpeechFocus",
+        type: "youtube",
+        tags: ["video","demo","speech enhancement"],
+        thumb: "img/research/JPG/research-03.jpg",
+        src: "https://youtu.be/UwOkG4duJss",
+        desc: "A real-time binaural speech enhancement system implemented on a single-board computer."
+      },
+      {
+        title: "Hearing Assistance App",
+        type: "photo",
+        tags: ["photo","speech enhancement"],
+        thumb: "img/research/JPG/research-10.jpg",
+        src: "img/research/research-09.gif",
+        desc: "An Android application implementing the Spatial SpeechFocus algorithm for real-time hearing support."
+      },
+      {
+        title: "People Detection",
+        type: "youtube",
+        tags: ["video","demo","image processing"],
+        thumb: "img/research/JPG/research-13.jpg",
+        src: "https://youtu.be/-kOTZSAfCTc",
+        desc: "A homework project from my master’s studies focused on human detection in an image processing course."
+      },
+      {
+        title: "Back-to-Back Speaker System",
+        type: "photo",
+        tags: ["photo","speaker array"],
+        thumb: "img/research/JPG/research-11.jpg",
+        src: "img/research/research-12.jpg",
+        desc: "A project exploring a directional loudspeaker system using two speakers positioned back-to-back."
+      },
+      {
+        title: "Front–Back Discrimination (1)",
+        type: "youtube",
+        tags: ["video","demo","sound localization"],
+        thumb: "img/research/JPG/research-04.jpg",
+        src: "https://youtu.be/lq4Aa0xdxbU",
+        desc: "An algorithm demo for identifying whether a sound comes from the front or back, tested with pink noise in an anechoic chamber."
+      },
+      {
+        title: "Front–Back Discrimination (2)",
+        type: "youtube",
+        tags: ["video","demo","sound localization"],
+        thumb: "img/research/JPG/research-05.jpg",
+        src: "https://youtu.be/NN70zxQM6Nc",
+        desc: "A follow-up test of the front/back localization algorithm in a normal room using pink noise, where the strongest peak indicates the estimated direction."
+      },
+      {
+        title: "Front–Back Discrimination (3)",
+        type: "youtube",
+        tags: ["video","demo","sound localization"],
+        thumb: "img/research/JPG/research-06.jpg",
+        src: "https://youtu.be/i6rrLb2bdWg",
+        desc: "Testing front/back localization with speech in a typical room; some trials still show front–back ambiguity."
+      },
+      {
+        title: "Bone Conduction Hearing",
+        type: "youtube",
+        tags: ["video","crosstalk cancellation"],
+        thumb: "img/research/JPG/research-07.jpg",
+        src: "https://youtu.be/i6rrLb2bdWg",
+        desc: "A research concept exploring crosstalk cancellation in bone-conducted sound, illustrated through an animated demonstration."
+      },
+      {
+        title: "GCC-PHAT",
+        type: "youtube",
+        tags: ["video","demo","sound localization"],
+        thumb: "img/research/JPG/research-08.jpg",
+        src: "https://youtu.be/qjTlt7AySVM",
+        desc: "A real-time sound localization demo using GCC-PHAT (not the FDBM algorithm mentioned in the video)."
+      },
+    ];
+
+    // ----------------------------
+    // Helpers
+    // ----------------------------
+    function youtubeId(url){
+      // supports: youtu.be/ID, youtube.com/watch?v=ID, youtube.com/embed/ID
+      try{
+        const u = new URL(url);
+        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+        if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
+        return u.searchParams.get("v");
+      }catch(e){
+        return null;
+      }
+    }
+
+    function makeTile(item, idx){
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.dataset.tags = item.tags.join(" ");
+      tile.tabIndex = 0;
+      tile.setAttribute("role","button");
+      tile.setAttribute("aria-label", item.title);
+
+      const isVideo = (item.type === "youtube" || item.type === "mp4");
+
+      tile.innerHTML = `
+        <div class="thumb">
+          <img src="${item.thumb}" alt="${item.title} thumbnail">
+          ${isVideo ? `<div class="play"><div class="btn"><div class="tri"></div></div></div>` : ``}
+        </div>
+        <div class="meta">
+          <div class="badge">${item.tags[0] ? item.tags[0].toUpperCase() : "ITEM"}</div>
+          <h3 class="title">${item.title}</h3>
+          <p class="desc">${item.desc}</p>
+        </div>
+      `;
+
+      tile.addEventListener("click", () => openModal(item));
+      tile.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          openModal(item);
+        }
+      });
+
+      return tile;
+    }
+
+    // ----------------------------
+    // Render
+    // ----------------------------
+    const grid = document.getElementById("grid");
+    MEDIA.forEach((item, i) => grid.appendChild(makeTile(item, i)));
+
+    // ----------------------------
+    // Filter chips
+    // ----------------------------
+    const chips = document.querySelectorAll(".chip");
+    let activeFilter = "all";
+
+    function applyFilter(){
+      const tiles = grid.querySelectorAll(".tile");
+      tiles.forEach(t => {
+        const tags = t.dataset.tags || "";
+        const show = (activeFilter === "all") || tags.includes(activeFilter);
+        t.style.display = show ? "" : "none";
+      });
+    }
+
+    chips.forEach(ch => {
+      ch.addEventListener("click", () => {
+        chips.forEach(c => c.classList.remove("active"));
+        ch.classList.add("active");
+        activeFilter = ch.dataset.filter;
+        applyFilter();
+      });
+    });
+
+    // ----------------------------
+    // Modal open/close
+    // ----------------------------
+    const modal = document.getElementById("modal");
+    const modalClose = document.getElementById("modalClose");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const player = document.getElementById("player");
+
+    function openModal(item){
+      modalTitle.textContent = item.title;
+      modalDesc.textContent = item.desc;
+
+      // Clear previous player
+      player.innerHTML = "";
+
+      if (item.type === "youtube"){
+        const id = youtubeId(item.src);
+        const embed = id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : item.src;
+        const iframe = document.createElement("iframe");
+        iframe.src = embed;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        player.appendChild(iframe);
+      }else if (item.type === "mp4"){
+        const v = document.createElement("video");
+        v.src = item.src;
+        v.controls = true;
+        v.playsInline = true;
+        v.autoplay = true;
+        player.appendChild(v);
+      }else if (item.type === "photo") {
+        // ✅ background for the remaining area
+        player.style.background = "#111";        // or "#000", or "rgba(0,0,0,.85)"
+        player.style.borderRadius = "12px";
+        player.style.padding = "10px";
+
+        // optional: center the image nicely
+        player.style.display = "flex";
+        player.style.justifyContent = "center";
+        player.style.alignItems = "center";
+
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = item.title;
+
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "80vh";
+        img.style.objectFit = "contain";
+        img.style.display = "block";
+
+        player.appendChild(img);
+      }
+
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden","true");
+      player.innerHTML = "";
+      document.body.style.overflow = "";
+    }
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("show")) closeModal();
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("navMenu");
+
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("show");
+      toggle.textContent = open ? "✕" : "☰";
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    // Close menu after clicking a link (mobile)
+    menu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          menu.classList.remove("show");
+          toggle.textContent = "☰";
+          toggle.setAttribute("aria-label", "Open menu");
+        }
+      });
+    });
+
+    // Loader: hide after everything (images, CSS) is loaded
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("page-loader");
+      if (!loader) return;
+
+      const HOLD_MS = 355;   // <-- control duration here
+      const FADE_MS = 355;   // should be a bit longer than the CSS transition
+
+      setTimeout(() => {
+        loader.classList.add("hide");
+        setTimeout(() => loader.remove(), FADE_MS);
+      }, HOLD_MS);
+    });
+  </script>
 </body>
-
 </html>

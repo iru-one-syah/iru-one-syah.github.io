@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Irwansyah | News</title>
+
+  <style>
+    :root{
+      --accent: #C9FF00;
+
+      /* Light theme */
+      --text: #111;
+      --muted: rgba(0,0,0,.72);
+      --muted2: rgba(0,0,0,.60);
+
+      --card: rgba(255,255,255,.03);
+      --card2: rgba(255,255,255,.10);
+      --stroke: rgba(0,0,0,.12);
+
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+      --radius: 18px;
+      --maxw: 1120px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: #f6f6f6;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Hide page scrollbar (still scrollable) */
+    html, body{
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar{
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    /* ---------- HERO BACKGROUND ---------- */
+    .hero{
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      position: relative;
+
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.30) 55%, rgba(255,255,255,.60) 100%),
+        url("img/bg.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before{
+      content:"";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(0,0,0,.06), transparent 40%),
+        radial-gradient(circle at 90% 20%, rgba(201,255,0,.10), transparent 45%),
+        radial-gradient(circle at 30% 90%, rgba(0,0,0,.05), transparent 45%);
+      opacity: .25;
+    }
+
+    /* ---------- TOP NAV ---------- */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.55);
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .navwrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      flex: 0 0 auto;
+    }
+
+    .nav-menu{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-menu a{
+      text-decoration: none;
+      color: rgba(0,0,0,.82);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, transform .08s ease;
+    }
+
+    .nav-menu a:hover{
+      background: rgba(0,0,0,.06);
+      border-color: rgba(0,0,0,.08);
+      transform: translateY(-1px);
+    }
+
+    .nav-menu a.active{
+      background: rgba(201,255,0,.22);
+      border-color: rgba(0,0,0,.18);
+      color: rgba(0,0,0,.92);
+    }
+
+    .menu-toggle{
+      display: none;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.18);
+      color: rgba(0,0,0,.9);
+      font-size: 18px;
+      line-height: 1;
+      padding: 8px 11px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .menu-toggle:hover{ background: rgba(0,0,0,.06); }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .content{
+      position: relative;
+      z-index: 1;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 24px 18px 18px;
+
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .card-inner{
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .headline{
+      margin: 0;
+      font-size: clamp(26px, 3.0vw, 38px);
+      letter-spacing: -0.4px;
+      line-height: 1.08;
+    }
+
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 109ch;
+    }
+
+    /* ---------- YEAR DROPDOWN (details/summary) ---------- */
+    details.year{
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.10);
+      border-radius: 16px;
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      margin-left: -6px;
+      margin-right: -6px;
+    }
+
+    details.year + details.year{ margin-top: 0px; }
+
+    summary.year-head{
+      list-style: none;
+      cursor: pointer;
+      padding: 3px 0px 3px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+      width: 100%;
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    summary.year-head::-webkit-details-marker{ display: none; }
+
+    .year-left{
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .year-title{
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+
+    .year-count{
+      font-size: 12px;
+      color: rgba(0,0,0,.70);
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.22);
+      border-radius: 999px;
+      padding: 6px 10px;
+      white-space: nowrap;
+    }
+
+    .chev{
+      width: 25px;
+      height: 25px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.20);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      transition: transform .18s ease;
+    }
+
+    details[open] .chev{ transform: rotate(180deg); }
+
+    .year-body{
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(0,0,0,.10);
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    /* ---------- NEWS ITEMS ---------- */
+    .news-item{
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 12px;
+
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .news-date{
+      font-size: 12px;
+      color: rgba(0,0,0,.70);
+      border: 1px solid rgba(0,0,0,.14);
+      background: rgba(255,255,255,.28);
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: center;
+      line-height: 1.15;
+      white-space: nowrap;
+      align-self: start;           /* ✅ stop stretching */
+      height: fit-content;         /* ✅ keep it tight */
+    }
+
+    .news-main h3{
+      margin: 0;
+      font-size: 14px;
+      font-weight: 820;
+      color: rgba(0,0,0,.90);
+      line-height: 1.35;
+    }
+
+    .news-main p{
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: rgba(0,0,0,.66);
+      line-height: 1.45;
+    }
+
+    /* With photo */
+    .news-item.with-photo{
+      grid-template-columns: 110px 1fr 280px;
+      align-items: start;          /* ✅ important for tall rows */
+    }
+
+    .news-photo{
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(255,255,255,.22);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .news-photo img{
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .news-photo .cap{
+      padding: 9px 10px;
+      font-size: 12px;
+      color: rgba(0,0,0,.62);
+      line-height: 1.35;
+      border-top: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.08);
+    }
+
+    .footerline{
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,.10);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(0,0,0,.55);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px){
+      .news-item.with-photo{
+        grid-template-columns: 110px 1fr;
+      }
+      .news-photo{ grid-column: 1 / -1; }
+      .news-photo img{ aspect-ratio: 16 / 9; }
+    }
+
+    @media (max-width: 560px){
+      .news-item{
+        grid-template-columns: 1fr;
+      }
+      .news-date{ width: fit-content; }
+
+      /* ✅ Fix: stack date, text, and photo vertically for photo items */
+      .news-item.with-photo{
+        grid-template-columns: 1fr;
+      }
+
+      .news-item.with-photo .news-main{
+        grid-column: 1;
+      }
+
+      .news-item.with-photo .news-photo{
+        grid-column: 1;
+      }
+    }
+
+    /* ---------- MOBILE NAV DROPDOWN ---------- */
+    @media (max-width: 768px){
+      .menu-toggle{ display: block; }
+      .navwrap{ flex-wrap: wrap; }
+
+      .nav-menu{
+        display: none;
+        width: 100%;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 8px;
+
+        margin-top: 10px;
+        padding: 10px;
+
+        border: 1px solid rgba(0,0,0,.12);
+        background: rgba(255,255,255,.03);
+        border-radius: 14px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .nav-menu.show{ display: flex; }
+
+      .nav-menu a{
+        padding: 10px 12px;
+        text-align: left;
+        border-radius: 12px;
+      }
+    }
+
+    /* ---------- LOADER OVERLAY ---------- */
+    #page-loader{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #f6f6f6; /* match the page background */
+      display: grid;
+      place-items: center;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #page-loader.hide{
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner{
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 4px solid rgba(0,0,0,.18);
+      border-top-color: var(--accent);
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin{
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="page-loader" aria-label="Loading">
+    <div class="loader-spinner" aria-hidden="true"></div>
+  </div>
+  <div class="hero">
+    <header class="topbar">
+      <div class="navwrap">
+        <div class="brand">
+          <div class="dot" aria-hidden="true"></div>
+          <span>ir-one</span>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+        <nav class="nav-menu" id="navMenu" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="timeline.html">Timeline</a>
+          <a href="research.html">Research</a>
+          <a href="fun-in-the-lab.html">Fun in the Lab</a>
+          <a href="highlights.html">Highlights</a>
+          <a class="active" href="news.html">News</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="card" aria-label="News">
+        <div class="card-inner">
+          <h1 class="headline">News</h1>
+          <p class="subtitle">
+            I am always learning and growing. This page keeps track of my updates — research, career milestones, and work-related activities. Click a year to explore the timeline.
+          </p>
+
+          <!-- 2026: add "open" if needed <details class="year" open> -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2026</div>
+                <div class="year-count">6 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <!-- no photo -->
+              <article class="news-item">
+                <div class="news-date">Mar 17-19</div>
+                <div class="news-main">
+                  <h3>Poster at ASJ Spring Meeting</h3>
+                  <p><b>Tokyo, Japan</b>—Poster presentation at the 2026 Spring Meeting of the Acoustical Society of Japan (ASJ), Nihon University.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Feb 27</div>
+                <div class="news-main">
+                  <h3>KAKENHI (Scientific Research C)</h3>
+                  <p><b>Japan</b>—My KAKENHI proposal was accepted, and the project will run from Apr 2026 to Mar 2029.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Feb</div>
+                <div class="news-main">
+                  <h3>Website Redesigned</h3>
+                  <p>Redesigned my personal website with a cleaner look and a more organized structure.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jan 31</div>
+                <div class="news-main">
+                  <h3>Invited Talk</h3>
+                  <p><b>Online</b>—Gave an invited presentation at a conference organized by SIMT, Institut Teknologi Sepuluh Nopember, Indonesia.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jan 28</div>
+                <div class="news-main">
+                  <h3>Paper Published in JJAP</h3>
+                  <p>My work on ultrasonic hearing was published in the Japanese Journal of Applied Physics under USE2025 special issue.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jan 28</div>
+                <div class="news-main">
+                  <h3>Poster at USE2025</h3>
+                  <p><b>Matsue, Japan</b>—Presented my work on DPOAE suppression by ultrasonic stimulation at the Symposium on Ultrasonic Electronics.</p>
+                </div>
+              </article>
+
+              <!-- with photo -->
+              <!-- <article class="news-item with-photo">
+                <div class="news-date">2026<br/>Jan</div>
+                <div class="news-main">
+                  <h3>New dataset / tool update</h3>
+                  <p>Improved measurement workflow and visualization for auditory experiments.</p>
+                </div>
+
+                <aside class="news-photo" aria-label="Photo">
+                  <img src="hero.jpg" alt="Example photo for news item">
+                  <div class="cap">Example photo caption</div>
+                </aside>
+              </article> -->
+            </div>
+          </details>
+
+          <!-- 2025: collapsed -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2025</div>
+                <div class="year-count">7 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <article class="news-item">
+                <div class="news-date">Nov 12–14</div>
+                <div class="news-main">
+                  <h3>Ultrasonic Electronics 2025</h3>
+                  <p><b>Matsue, Japan</b>—Presented our study on DPOAE suppression induced by bone-conducted ultrasound.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 23–26</div>
+                <div class="news-main">
+                  <h3>IEEE GCCE 2025</h3>
+                  <p><b>Osaka, Japan</b>—Presented our work on IMD suppression toward single-channel DPOAE screening.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 18–19</div>
+                <div class="news-main">
+                  <h3>Life Engineering Symposium 2025</h3>
+                  <p><b>Chiba, Japan</b>—Presented development of a phantom head for bone-conduction and spatial hearing studies.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jun 13</div>
+                <div class="news-main">
+                  <h3>Paper Published (IEEE Access)</h3>
+                  <p><b>Journal</b>—Our IEEE Access paper on DPOAE measurements in humans and ear models was published.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jun 5–7</div>
+                <div class="news-main">
+                  <h3>JSMBE 2025</h3>
+                  <p><b>Fukui, Japan</b>—Presented findings from single-loudspeaker DPOAE measurements in 50 human ears.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 17–19</div>
+                <div class="news-main">
+                  <h3>Awaya Kiyoshi Academic Encouragement Award</h3>
+                  <p><b>Saitama, Japan</b>—Truly honored to receive the Awaya Kiyoshi Academic Encouragement Award at ASJ Spring Meeting 2025.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 17–19</div>
+                <div class="news-main">
+                  <h3>ASJ Spring Meeting 2025</h3>
+                  <p><b>Saitama, Japan</b>—Presented our work on single-loudspeaker DPOAE measurement.</p>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <!-- 2024: collapsed (example) -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2024</div>
+                <div class="year-count">9 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <article class="news-item">
+                <div class="news-date">Dec 25</div>
+                <div class="news-main">
+                  <h3>Paper Published (HardwareX)</h3>
+                  <p><b>Journal</b>—Our HardwareX paper on 3D-printed dummy heads for bone-conduction studies was published.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Nov 12</div>
+                <div class="news-main">
+                  <h3>Chiba University Medical Engineering Symposium</h3>
+                  <p><b>Chiba, Japan</b>—Presented a poster on 3D-printed stethoscope design.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 29 – Nov 1</div>
+                <div class="news-main">
+                  <h3>IEEE GCCE 2024</h3>
+                  <p><b>Kitakyushu, Japan</b>—Presented findings on estimating bone-conduction hearing thresholds using a forehead accelerometer.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 4–6</div>
+                <div class="news-main">
+                  <h3>ASJ Autumn Meeting 2024</h3>
+                  <p><b>Osaka, Japan</b>—Presented evaluation results of 3D-printed dummy heads for bone conduction studies.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">May 23–25</div>
+                <div class="news-main">
+                  <h3>JSMBE 2024</h3>
+                  <p><b>Kagoshima, Japan</b>—Presented a comparison between human subjects and dummy skull models.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Apr 19</div>
+                <div class="news-main">
+                  <h3>Paper Published (Acoustical Science and Technology)</h3>
+                  <p><b>Journal</b>—Our paper on pinna hardness and vibrator placement was published in Acoustical Science and Technology.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 6–8</div>
+                <div class="news-main">
+                  <h3>ASJ Spring Meeting 2024</h3>
+                  <p><b>Tokyo, Japan</b>—Presented a comparative study on cartilage conduction in artificial and human pinnas.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Feb 29</div>
+                <div class="news-main">
+                  <h3>KAKENHI (Early-Career Scientists)</h3>
+                  <p><b>Japan</b>—My KAKENHI proposal was accepted, and the project will run from Apr 2024 to Mar 2026.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Feb 29</div>
+                <div class="news-main">
+                  <h3>KAKENHI (Scientific Research B)</h3>
+                  <p><b>Japan</b>—Joined an accepted KAKENHI project as a Co-Investigator, running from Apr 2024 to Mar 2027.</p>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <!-- 2023: collapsed (example) -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2023</div>
+                <div class="year-count">10 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <article class="news-item">
+                <div class="news-date">Nov 13–15</div>
+                <div class="news-main">
+                  <h3>Ultrasonic Electronics 2023</h3>
+                  <p><b>Toyama, Japan</b>—Presented our study on pinna hardness and vibrator placement.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 2</div>
+                <div class="news-main">
+                  <h3>Paper Published (MethodsX)</h3>
+                  <p><b>Journal</b>—Our MethodsX paper was published, sharing our method and evaluation for unilateral crosstalk cancellation.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 26–28</div>
+                <div class="news-main">
+                  <h3>ASJ Autumn Meeting 2023</h3>
+                  <p><b>Nagoya, Japan</b>—Presented studies on silicone pinna models and optimized crosstalk cancellation.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 15–16</div>
+                <div class="news-main">
+                  <h3>Research Encouragement Award</h3>
+                  <p><b>Kawagoe, Japan</b>—Excited to receive the Research Encouragement Award at the Life Engineering Symposium 2023.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 15–16</div>
+                <div class="news-main">
+                  <h3>Life Engineering Symposium 2023</h3>
+                  <p><b>Kawagoe, Japan</b>—Presented a human vs. dummy head comparison study in bone conduction.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Aug 20–23</div>
+                <div class="news-main">
+                  <h3>INTER-NOISE 2023</h3>
+                  <p><b>Chiba, Japan</b>—Presented a combined strategy for crosstalk cancellation in bone conduction.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jul 24–27</div>
+                <div class="news-main">
+                  <h3>IEEE EMBC 2023</h3>
+                  <p><b>Sydney, Australia</b>—Presented an accelerometer-based approach for crosstalk cancellation at IEEE EMBC 2023.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Apr 1</div>
+                <div class="news-main">
+                  <h3>New Role at CFME</h3>
+                  <p><b>Chiba, Japan</b>—Starting April 1, my job title changed to Specially Appointed Assistant Professor at CFME, Chiba University.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 15–17</div>
+                <div class="news-main">
+                  <h3>ASJ Spring Meeting 2023</h3>
+                  <p><b>Online</b>—Presented a low-cost 3D-printed stethoscope connected to a smartphone.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jan 1–8, 2023</div>
+                <div class="news-main">
+                  <h3>IEEE ICCE 2023</h3>
+                  <p><b>Las Vegas, USA</b>—Presented real-time unilateral crosstalk cancellation at IEEE ICCE 2023.</p>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <!-- 2022: collapsed (example) -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2022</div>
+                <div class="year-count">8 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <article class="news-item">
+                <div class="news-date">Dec 10</div>
+                <div class="news-main">
+                  <h3>Young Researcher Presentation</h3>
+                  <p><b>Tokyo, Japan</b>—Presented real-time crosstalk cancellation for bone conduction hearing devices.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 24–28</div>
+                <div class="news-main">
+                  <h3>ICA Young Scientist Grant</h3>
+                  <p><b>Gyeongju, Korea</b>—Grateful to receive the ICA Young Scientist Grant at ICA 2022.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 24–28</div>
+                <div class="news-main">
+                  <h3>ICA 2022 Presentation</h3>
+                  <p><b>Gyeongju, Korea</b>—Presented our study on bone-conduction cross-talk at ICA 2022.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Sep 13–16</div>
+                <div class="news-main">
+                  <h3>ASJ Autumn Meeting 2022</h3>
+                  <p><b>Hokkaido, Japan</b>—Presented unilateral crosstalk cancellation using a mastoid accelerometer.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jul 27</div>
+                <div class="news-main">
+                  <h3>Paper Published (IEEE Access)</h3>
+                  <p><b>Journal</b>—Happy to share that our IEEE Access paper on bone-conduction crosstalk cancellation was published.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 9–11</div>
+                <div class="news-main">
+                  <h3>ASJ Spring Meeting 2022</h3>
+                  <p><b>Online</b>—Presented our study on tone reception thresholds and crosstalk cancellation.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Mar 7–9</div>
+                <div class="news-main">
+                  <h3>LifeTech 2022 Demo</h3>
+                  <p><b>Osaka, Japan</b>—Gave a demo presentation on a 3D-printed stethoscope at IEEE LifeTech 2022.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Feb 28</div>
+                <div class="news-main">
+                  <h3>KAKENHI (Early-Career Scientists)</h3>
+                  <p><b>Japan</b>—My KAKENHI proposal was accepted, running from Apr 2022 to Mar 2024.</p>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <!-- 2021: collapsed (example) -->
+          <details class="year">
+            <summary class="year-head">
+              <div class="year-left">
+                <div class="year-title">2021</div>
+                <div class="year-count">6 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="year-body">
+              <article class="news-item">
+                <div class="news-date">Nov 19</div>
+                <div class="news-main">
+                  <h3>Online Poster</h3>
+                  <p><b>Chiba, Japan</b>—Presented a poster at the 19th Chiba University Medical Engineering Symposium (第19回 千葉大学医工学シンポジウム).</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 5–6</div>
+                <div class="news-main">
+                  <h3>Best Paper Award (IC3INA 2021)</h3>
+                  <p><b>Online (Indonesia)</b>—Honored to receive the Best Paper Award at IC3INA 2021.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 5–6</div>
+                <div class="news-main">
+                  <h3>Best Presentation Award (IC3INA 2021)</h3>
+                  <p><b>Online (Indonesia)</b>—Really happy to receive the Best Presentation Award at IC3INA 2021.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Oct 5–6</div>
+                <div class="news-main">
+                  <h3>IC3INA 2021 Presentation</h3>
+                  <p><b>Online (Indonesia)</b>—Presented my work on bone-conducted cross-talk for biometric identification at IC3INA 2021.</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">Jun 21</div>
+                <div class="news-main">
+                  <h3>Joined CFME</h3>
+                  <p><b>Chiba, Japan</b>—Signed my contract with the CFME, Chiba University, and started as a Project Researcher (Research Fellow).</p>
+                </div>
+              </article>
+
+              <article class="news-item">
+                <div class="news-date">June 4</div>
+                <div class="news-main">
+                  <h3>Touchdown in Japan</h3>
+                  <p><b>Tokyo, Japan</b>—Finally landed at Narita Airport (so excited!).</p>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <div class="footerline">
+            <div>© <span id="year"></span> by ir-one</div>
+            <div>Contact: irwansyah [at] ieee.org</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("navMenu");
+
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("show");
+      toggle.textContent = open ? "✕" : "☰";
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    // Close menu after clicking a link (mobile)
+    menu.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          menu.classList.remove("show");
+          toggle.textContent = "☰";
+          toggle.setAttribute("aria-label", "Open menu");
+        }
+      });
+    });
+
+    // Loader: hide after everything (images, CSS) is loaded
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("page-loader");
+      if (!loader) return;
+
+      const HOLD_MS = 355;   // <-- control duration here
+      const FADE_MS = 355;   // should be a bit longer than the CSS transition
+
+      setTimeout(() => {
+        loader.classList.add("hide");
+        setTimeout(() => loader.remove(), FADE_MS);
+      }, HOLD_MS);
+    });
+  </script>
+</body>
+</html>
