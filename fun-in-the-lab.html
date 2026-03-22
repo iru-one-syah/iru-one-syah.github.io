@@ -532,22 +532,19 @@
 
           <div class="filter-row" aria-label="Filters">
             <div class="chip active" data-filter="all"><b>ALL</b></div>
-            <div class="chip" data-filter="demo">Demo</div>
-            <div class="chip" data-filter="video">Videos</div>
-            <div class="chip" data-filter="tutorial">Tutorial</div>
+            <div class="chip" data-filter="dummy head">Dummy Head</div>
+            <div class="chip" data-filter="dpoae">Otoacoustic Emissions</div>
             <div class="chip" data-filter="3d scanning">3D Scanning</div>
             <div class="chip" data-filter="silicone pinna">Silicone Pinna</div>
-            <div class="chip" data-filter="dummy head">Dummy Head</div>
             <div class="chip" data-filter="machine learning">Machine Learning</div>
             <div class="chip" data-filter="crosstalk cancellation">Crosstalk Cancellation</div>
-            <div class="chip" data-filter="stethoscope">Stethoscope</div>
             <div class="chip" data-filter="hearing threshold">Hearing Threshold</div>
+            <div class="chip" data-filter="sound localization">Binaural Sound Localization</div>
+            <div class="chip" data-filter="stethoscope">Stethoscope</div>
             <div class="chip" data-filter="user authentication">User Authentication</div>
-            <div class="chip" data-filter="photo">Photos</div>
             <div class="chip" data-filter="speech enhancement">Speech Enhancement</div>
             <div class="chip" data-filter="image processing">Image Processing</div>
             <div class="chip" data-filter="speaker array">Loudspeaker Array</div>
-            <div class="chip" data-filter="sound localization">Binaural Sound Localization</div>
           </div>
 
           <div class="grid" id="grid" aria-label="Media grid"></div>
@@ -585,9 +582,17 @@
     // ----------------------------
     const MEDIA = [
       {
+        title: "Seeing DPOAEs in Real Time",
+        type: "youtube",
+        tags: ["dpoae"],
+        thumb: "img/research/JPG/research-27.jpg",
+        src: "https://youtu.be/Xl9KXrxrke0",
+        desc: "A short video showing how my custom system measures DPOAEs in real time, including tests with an ear simulator and a human ear."
+      },
+      {
         title: "1-Minute Silicone Pinna",
         type: "youtube",
-        tags: ["video","tutorial","silicone pinna"],
+        tags: ["silicone pinna"],
         thumb: "img/research/JPG/research-25.jpg",
         src: "https://youtu.be/WkKg865pGbI",
         desc: "A quick build log: 3D model → mold → silicone casting in about one minute (timelapse style)."
@@ -595,7 +600,7 @@
       {
         title: "My Hearing Test Demo",
         type: "youtube",
-        tags: ["video","demo"],
+        tags: ["hearing threshold"],
         thumb: "img/research/JPG/research-24.jpg",
         src: "https://youtu.be/d9xgpLJQ694",
         desc: "A simple demo video used to explain the hearing test procedure to my subjects."
@@ -603,7 +608,7 @@
       {
         title: "DIY 3D-Printed Dummy Head",
         type: "youtube",
-        tags: ["video","tutorial","dummy head"],
+        tags: ["dummy head"],
         thumb: "img/research/JPG/research-23.jpg",
         src: "https://youtu.be/5bxazr6eseA",
         desc: "A short guide showing the dummy head build steps and materials."
@@ -611,7 +616,7 @@
       {
         title: "My First Human Head Scan with MIRACO",
         type: "youtube",
-        tags: ["video","3d scanning"],
+        tags: ["3d scanning"],
         thumb: "img/research/JPG/research-26.jpg",
         src: "https://youtu.be/7EqbUHB-9CQ",
         desc: "A short video of my early 3D scanning test using the MIRACO scanner on a human head."
@@ -619,7 +624,7 @@
       {
         title: "Cancelling Crosstalk at the Mastoid",
         type: "youtube",
-        tags: ["video","demo","crosstalk cancellation"],
+        tags: ["crosstalk cancellation"],
         thumb: "img/research/JPG/research-22.jpg",
         src: "https://youtu.be/SY15300dORE",
         desc: "A short demo showing how anti-sound reduces the crosstalk at the mastoid measurement point."
@@ -627,7 +632,7 @@
       {
         title: "DIY Silicone Pinna",
         type: "youtube",
-        tags: ["video","tutorial","silicone pinna"],
+        tags: ["silicone pinna"],
         thumb: "img/research/JPG/research-21.jpg",
         src: "https://youtu.be/KvZY5TiOy1I",
         desc: "A video documenting how I make a silicone pinna, from mold preparation to casting."
@@ -635,7 +640,7 @@
       {
         title: "3D-Printed Connected Stethoscope",
         type: "youtube",
-        tags: ["video","demo","stethoscope"],
+        tags: ["stethoscope"],
         thumb: "img/research/JPG/research-19.jpg",
         src: "https://youtu.be/KcsgZ78jVzc",
         desc: "A short demo of heart sound recording using a smartphone and a custom 3D-printed stethoscope."
@@ -643,7 +648,7 @@
       {
         title: "Real-Time Crosstalk Cancellation",
         type: "youtube",
-        tags: ["video","demo","crosstalk cancellation"],
+        tags: ["crosstalk cancellation"],
         thumb: "img/research/JPG/research-20.jpg",
         src: "https://youtu.be/D-Oy1AyythQ",
         desc: "A real-time system for reducing bone-conduction crosstalk using the Bela Mini embedded audio platform."
@@ -651,7 +656,7 @@
       {
         title: "Hearing Threshold",
         type: "youtube",
-        tags: ["video","demo","hearing threshold"],
+        tags: ["hearing threshold"],
         thumb: "img/research/JPG/research-18.jpg",
         src: "https://youtu.be/c4teA8M6TQw",
         desc: "A simple demo showing how hearing threshold is measured—the lowest sound level that can be perceived."
@@ -659,7 +664,7 @@
       {
         title: "Bone Conduction Authentication",
         type: "youtube",
-        tags: ["video","demo","user authentication","machine learning"],
+        tags: ["user authentication","machine learning"],
         thumb: "img/research/JPG/research-17.jpg",
         src: "https://youtu.be/LQtHSgGGkHc",
         desc: "A proof-of-concept showing user verification using bone-conducted audio features."
@@ -667,7 +672,7 @@
       {
         title: "Smartphone Case Stethoscope",
         type: "youtube",
-        tags: ["video","demo","stethoscope"],
+        tags: ["stethoscope"],
         thumb: "img/research/JPG/research-15.jpg",
         src: "https://youtu.be/oCtRc6vQuxQ",
         desc: "A prototype attachment that turns a smartphone into a digital stethoscope using a case-style design."
@@ -675,7 +680,7 @@
       {
         title: "StethoPhone",
         type: "youtube",
-        tags: ["video","demo","stethoscope"],
+        tags: ["stethoscope"],
         thumb: "img/research/JPG/research-01.jpg",
         src: "https://www.youtube.com/watch?v=Fqwtk9E6iHg",
         desc: "A low-cost digital stethoscope prototype created using 3D printing and designed for use with smartphones."
@@ -683,7 +688,7 @@
       {
         title: "StethoPhone App",
         type: "youtube",
-        tags: ["video","demo","stethoscope"],
+        tags: ["stethoscope"],
         thumb: "img/research/JPG/research-02.jpg",
         src: "https://youtu.be/ZBURfkvvsv4",
         desc: "An Android-based signal processing app with streaming, filtering, recording, and data-sharing capabilities."
@@ -691,7 +696,7 @@
       {
         title: "Localization using Machine Learning",
         type: "youtube",
-        tags: ["video","demo","sound localization","machine learning"],
+        tags: ["sound localization","machine learning"],
         thumb: "img/research/JPG/research-16.jpg",
         src: "https://youtu.be/IoMTMzMQUdo",
         desc: "An experimental real-time sound localization system using SVM-based classification."
@@ -699,7 +704,7 @@
       {
         title: "Spatial SpeechFocus",
         type: "youtube",
-        tags: ["video","demo","speech enhancement"],
+        tags: ["speech enhancement"],
         thumb: "img/research/JPG/research-03.jpg",
         src: "https://youtu.be/UwOkG4duJss",
         desc: "A real-time binaural speech enhancement system implemented on a single-board computer."
@@ -707,7 +712,7 @@
       {
         title: "Hearing Assistance App",
         type: "photo",
-        tags: ["photo","speech enhancement"],
+        tags: ["speech enhancement"],
         thumb: "img/research/JPG/research-10.jpg",
         src: "img/research/research-09.gif",
         desc: "An Android application implementing the Spatial SpeechFocus algorithm for real-time hearing support."
@@ -715,7 +720,7 @@
       {
         title: "People Detection",
         type: "youtube",
-        tags: ["video","demo","image processing"],
+        tags: ["image processing"],
         thumb: "img/research/JPG/research-13.jpg",
         src: "https://youtu.be/-kOTZSAfCTc",
         desc: "A homework project from my master’s studies focused on human detection in an image processing course."
@@ -723,7 +728,7 @@
       {
         title: "Back-to-Back Speaker System",
         type: "photo",
-        tags: ["photo","speaker array"],
+        tags: ["speaker array"],
         thumb: "img/research/JPG/research-11.jpg",
         src: "img/research/research-12.jpg",
         desc: "A project exploring a directional loudspeaker system using two speakers positioned back-to-back."
@@ -731,7 +736,7 @@
       {
         title: "Front–Back Discrimination (1)",
         type: "youtube",
-        tags: ["video","demo","sound localization"],
+        tags: ["sound localization"],
         thumb: "img/research/JPG/research-04.jpg",
         src: "https://youtu.be/lq4Aa0xdxbU",
         desc: "An algorithm demo for identifying whether a sound comes from the front or back, tested with pink noise in an anechoic chamber."
@@ -739,7 +744,7 @@
       {
         title: "Front–Back Discrimination (2)",
         type: "youtube",
-        tags: ["video","demo","sound localization"],
+        tags: ["sound localization"],
         thumb: "img/research/JPG/research-05.jpg",
         src: "https://youtu.be/NN70zxQM6Nc",
         desc: "A follow-up test of the front/back localization algorithm in a normal room using pink noise, where the strongest peak indicates the estimated direction."
@@ -747,7 +752,7 @@
       {
         title: "Front–Back Discrimination (3)",
         type: "youtube",
-        tags: ["video","demo","sound localization"],
+        tags: ["sound localization"],
         thumb: "img/research/JPG/research-06.jpg",
         src: "https://youtu.be/i6rrLb2bdWg",
         desc: "Testing front/back localization with speech in a typical room; some trials still show front–back ambiguity."
@@ -755,7 +760,7 @@
       {
         title: "Bone Conduction Hearing",
         type: "youtube",
-        tags: ["video","crosstalk cancellation"],
+        tags: ["crosstalk cancellation"],
         thumb: "img/research/JPG/research-07.jpg",
         src: "https://youtu.be/i6rrLb2bdWg",
         desc: "A research concept exploring crosstalk cancellation in bone-conducted sound, illustrated through an animated demonstration."
@@ -763,7 +768,7 @@
       {
         title: "GCC-PHAT",
         type: "youtube",
-        tags: ["video","demo","sound localization"],
+        tags: ["sound localization"],
         thumb: "img/research/JPG/research-08.jpg",
         src: "https://youtu.be/qjTlt7AySVM",
         desc: "A real-time sound localization demo using GCC-PHAT (not the FDBM algorithm mentioned in the video)."
