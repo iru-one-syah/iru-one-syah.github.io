@@ -485,6 +485,21 @@
       line-height: 1.45;
     }
 
+    .peer-cat{
+      margin-top: 2px;
+    }
+
+    .peer-note{
+      margin: -2px 0 10px;
+      font-size: 12.5px;
+      color: rgba(0,0,0,.62);
+      line-height: 1.45;
+    }
+
+    .peer-list{
+      gap: 8px;
+    }
+
     /* Publications: highlight author + DOI link */
     .pub-author-me{
       color: #5d77d2;            /* blue */
@@ -716,6 +731,27 @@
                   <h4>Domestic Presentation (36)</h4>
                   <h5>(21 first-author, 15 co-author)</h5>
                   <ul class="pub-list" id="pubDomestic"></ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- 4) Peer reviewing -->
+          <details class="section">
+            <summary class="section-head">
+              <div class="sec-left">
+                <div class="sec-title">Peer Reviewing</div>
+                <div class="sec-count" id="countPeerReview">0 reviews</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="sec-body">
+              <div class="pub-grid">
+                <div class="pub-cat">
+                  <h4>Review Activities</h4>
+                  <h5 class="peer-note">A summary of my peer-review service for journals and conferences.</h5>
+                  <ul class="pub-list peer-list" id="peerReviewList"></ul>
                 </div>
               </div>
             </div>
@@ -1008,6 +1044,13 @@
       ]
     };
 
+    const PEER_REVIEWING = [
+      { name: "MethodsX", countText: "2023 (4), 2024 (3)", count: 7, url: "https://www.sciencedirect.com/journal/methodsx" },
+      { name: "Journal of Mechanical Engineering, Science, and Innovation", countText: "2024 (1), 2026 (2)", count: 3, url: "https://ejurnal.itats.ac.id/jmesi/"},
+      { name: "Proceedings of IEEE International Conference on Consumer Electronics (ICCE)", countText: "2026 (4)", count: 4, url: "https://icce.org/"},
+      { name: "Proceedings of IEEE International Biomedical Instrumentation and Technology Conference (IBITeC)", countText: "2021 (3), 2023 (4)", count: 7, url: "https://ibitec.uii.ac.id/"},
+    ];
+
     // Activity chart data by year.
     // (Years can be any range.)
     const ACTIVITY = [
@@ -1234,6 +1277,22 @@
     renderPubList(j, PUBS.journal);
     renderPubList(i, PUBS.intl);
     renderPubList(d, PUBS.domestic);
+
+    const peerReviewList = document.getElementById("peerReviewList");
+    PEER_REVIEWING.forEach(entry => {
+      const li = el("li", "");
+      const label = entry.url
+        ? `<a class="pub-link" href="${entry.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.name)}</a>`
+        : escapeHtml(entry.name);
+      const countText = entry.countText
+        ? escapeHtml(entry.countText)
+        : String(entry.count ?? "");
+      li.innerHTML = `${label} <span class="pill">${countText}</span>`;
+      peerReviewList.appendChild(li);
+    });
+
+    const totalPeerReviews = PEER_REVIEWING.reduce((sum, entry) => sum + (Number(entry.count) || 0), 0);
+    document.getElementById("countPeerReview").textContent = `${totalPeerReviews} reviews`;
 
     const totalPubs = PUBS.journal.length + PUBS.intl.length + PUBS.domestic.length;
     document.getElementById("countPubs").textContent = `${totalPubs} items`;
