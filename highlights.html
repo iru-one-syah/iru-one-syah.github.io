@@ -703,7 +703,22 @@
             </div>
           </details>
 
-          <!-- 3) Publications -->
+          <!-- 3) Media & research features -->
+          <details class="section">
+            <summary class="section-head">
+              <div class="sec-left">
+                <div class="sec-title">Media Coverage</div>
+                <div class="sec-count" id="countFeatures">0 items</div>
+              </div>
+              <div class="chev">⌄</div>
+            </summary>
+
+            <div class="sec-body" id="featuresList">
+              <!-- Filled by JS -->
+            </div>
+          </details>
+
+          <!-- 4) Publications -->
           <details class="section">
             <summary class="section-head">
               <div class="sec-left">
@@ -736,7 +751,7 @@
             </div>
           </details>
 
-          <!-- 4) Peer reviewing -->
+          <!-- 5) Peer reviewing -->
           <details class="section">
             <summary class="section-head">
               <div class="sec-left">
@@ -969,6 +984,30 @@
       }
     ];
 
+    // Media & research features
+    const FEATURES = [
+      {
+        date: "18 Aug 2026",
+        title: "Featured in Nature — 3D Printing for Bone-Conduction Research",
+        desc: "Interviewed by science writer Neil Savage about my research using anatomically accurate 3D-printed dummy heads to study bone-conduction crosstalk. The work was featured in Nature's Technology Feature, “Five ways 3D printing is improving lab work.”",
+        source: "Nature · Technology Feature",
+        citation: "Nature 656, 783–784 (2026)",
+        byline: "By Neil Savage",
+        links: [
+          { label: "Read the Nature feature", url: "https://www.nature.com/articles/d41586-026-02535-z" }
+        ]
+      },
+      {
+        date: "17 May 2018",
+        title: "Research Covered by the University of Tokyo — Falling Walls Lab Tokyo 2018",
+        desc: "東京大学は、2018年のFalling Walls Lab Tokyoで発表した私の骨伝導研究を紹介しました。この大会で私は第2位を受賞し、ドイツ・ベルリンで開催されたFalling Walls Lab Finaleへの出場者にも選ばれました。",
+        source: "The University of Tokyo · UTokyo FOCUS",
+        links: [
+          { label: "Read the UTokyo article", url: "https://www.u-tokyo.ac.jp/focus/ja/articles/t_z0508_00100.html" }
+        ]
+      }
+    ];
+
     // Publications
     const PUBS = {
       journal: [
@@ -1090,7 +1129,7 @@
     ];
 
     // =========================
-    // Render: Grants / Awards / Pubs
+    // Render: Grants / Awards / Media Features / Pubs
     // =========================
 
     function el(tag, cls){
@@ -1194,6 +1233,62 @@
       }
 
       awardsList.appendChild(a);
+    });
+
+    // Media & research features list
+    const featuresList = document.getElementById("featuresList");
+    document.getElementById("countFeatures").textContent = `${FEATURES.length} ${FEATURES.length === 1 ? "item" : "items"}`;
+
+    FEATURES.forEach(x => {
+      const a = el("article", "item");
+      const left = el("div", "when");
+      left.textContent = x.date;
+
+      const right = el("div", "");
+      const h = el("h3", "");
+      h.textContent = x.title;
+      const p = el("p", "");
+      p.textContent = x.desc;
+
+      right.appendChild(h);
+      right.appendChild(p);
+
+      const meta = el("div", "meta-row");
+      if (x.source) {
+        const source = el("span", "pill accent");
+        source.textContent = x.source;
+        meta.appendChild(source);
+      }
+      if (x.citation) {
+        const citation = el("span", "pill");
+        citation.textContent = x.citation;
+        meta.appendChild(citation);
+      }
+      if (x.byline) {
+        const byline = el("span", "pill");
+        byline.textContent = x.byline;
+        meta.appendChild(byline);
+      }
+      right.appendChild(meta);
+
+      const links = x.links || [];
+      if (links.length) {
+        const row = el("div", "award-links");
+        links.forEach(L => {
+          if (!L?.url) return;
+          const aTag = el("a", "award-link");
+          aTag.href = L.url;
+          aTag.target = "_blank";
+          aTag.rel = "noopener noreferrer";
+          aTag.textContent = `[${L.label || "link"}]`;
+          row.appendChild(aTag);
+        });
+        right.appendChild(row);
+      }
+
+      a.appendChild(left);
+      a.appendChild(right);
+      featuresList.appendChild(a);
     });
 
     // Publications list (with: highlight "Irwansyah" + clickable DOI)
